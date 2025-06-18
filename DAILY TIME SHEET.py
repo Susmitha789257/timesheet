@@ -34,9 +34,11 @@ def TaskMenu(choice):
     if temp==0:
         LevelMenu()
     elif temp in [1,2]:
-        percent=int(input("Please enter your GYM WORKOUT completion percentage: "))
-        print("Wonderful")
-        print(task[temp][1])
+        percent=int(input(f"Please enter your {task[temp][1]} completion percentage: "))
+        sql=f"insert into DailyTimeSheet({task[temp][1]})values(%s)"
+        cursor.execute(sql,[percent])
+        conn.commit()
+        print(f"{task[temp][1]} percentage {percent}% saved successfully!")
     else:
         print("Oops! Invalid option. Please enter a valid option and try again!")
         TaskMenu(choice)
@@ -63,11 +65,6 @@ def MainMenu():
         print("Oops! Invalid option. Please enter a valid option and try again!")
         MainMenu()
 MainMenu()
-<<<<<<< HEAD
-print("this is update version123")
-=======
-print("this is update version")
->>>>>>> f4caed3763c4cfd01a487fac77f5656f6e9b3197
 
 ##while True:
 ##    app.Actions()
